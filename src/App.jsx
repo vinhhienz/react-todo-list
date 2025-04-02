@@ -6,25 +6,34 @@ export default function App() {
   const [toDoList, setToDoList] = useState([]);
 
   function handleAddToDo(newToDo) {
-    setToDoList([...toDoList, {id: Date.now(), toDo: newToDo, completed: false}]);
+    setToDoList([
+      ...toDoList,
+      { id: Date.now(), toDo: newToDo, completed: false },
+    ]);
   }
 
-  function handleCompleteToDo(changedToDo){
-    setToDoList(toDoList.map((item) => {
-      if(item.id === changedToDo.id)
-        return changedToDo;
-      else
-      return item;
-    }));    
+  function handleCompleteToDo(changedToDo) {
+    setToDoList(
+      toDoList.map((item) => {
+        if (item.id === changedToDo.id) return changedToDo;
+        else return item;
+      })
+    );
   }
-  function handleDeleteToDo(id){
+  function handleDeleteToDo(id) {
     setToDoList(toDoList.filter((item) => item.id !== id));
   }
 
   return (
     <>
-      <NewToDoForm onSubmit={handleAddToDo} />
-      <ToDoList itemList={toDoList} onDeleteToDo={handleDeleteToDo} onChangeToDo={handleCompleteToDo} />
+      <div className="flex flex-col items-center justify-start min-h-screen bg-gray-100">
+        <NewToDoForm onSubmit={handleAddToDo} />
+        <ToDoList
+          itemList={toDoList}
+          onDeleteToDo={handleDeleteToDo}
+          onChangeToDo={handleCompleteToDo}
+        />
+      </div>
     </>
-  )
+  );
 }
