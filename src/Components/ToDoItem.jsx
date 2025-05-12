@@ -1,6 +1,6 @@
 export default function ToDoItem({ item, onChange, onDelete }) {
   return (
-    <li>
+    <li className="flex items-center justify-between p-2 border-b-2 border-gray-300">
       <input
         className="p-2"
         type="checkbox"
@@ -8,7 +8,7 @@ export default function ToDoItem({ item, onChange, onDelete }) {
         onChange={(e) => onChange({ ...item, completed: e.target.checked })}
       />
       <span className="p-2 border-2 border-gray-300 rounded-sm m-2">
-        {item.toDo}
+        {item.todo}
       </span>
       <button
         className="p-2 rounded-sm bg-red-500 hover:bg-red-700 active:bg-red-900 justify-items-end"

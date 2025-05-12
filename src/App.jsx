@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewToDoForm from "./Components/NewToDoForm";
 import ToDoList from "./Components/ToDoList";
+import { getToDoList } from "./Services/ToDoServices";
 
 export default function App() {
   const [toDoList, setToDoList] = useState([]);
 
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getToDoList();
+      setToDoList(data.todos);
+      console.log(data.todos);
+    }
+    fetchData();
+  }, []);
+
   function handleAddToDo(newToDo) {
     setToDoList([
       ...toDoList,
-      { id: Date.now(), toDo: newToDo, completed: false },
+      { id: Date.now(), todo: newToDo, completed: false },
     ]);
   }
 
